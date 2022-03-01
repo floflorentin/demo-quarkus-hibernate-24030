@@ -1,0 +1,6 @@
+.idea
+*/target
+core/src/main/resources/META-INF/resources
+/DockerVolumes/*/Volume
+/rootcause.iml
+/*/*.iml

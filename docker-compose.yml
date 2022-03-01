@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+
+  rabbitmq:
+    container_name: "rabbitmq"
+    image: rabbitmq:3.9-management-alpine
+    hostname: rabbitmq
+    networks:
+      - root-cause-net
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./DockerVolumes/RabbitMQ/Setup/:/etc/rabbitmq/
+
+  timescale:
+    image: timescale/timescaledb:2.6.0-pg12
+    container_name: "timescale"
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "rootcause"
+    networks:
+      - root-cause-net
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./DockerVolumes/TimeScale/Setup/DBinit:/docker-entrypoint-initdb.d
+
+networks:
+  root-cause-net:
+    driver: bridge
