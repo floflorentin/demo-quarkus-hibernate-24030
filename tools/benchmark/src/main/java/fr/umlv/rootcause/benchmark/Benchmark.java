@@ -15,11 +15,11 @@ public class Benchmark {
         List<String> stringList = new ArrayList<>();
         int batchSize = 3000;
         IntStream.range(0, batchSize)
-                .forEach(i -> stringList.add("2020-06-15\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\t12:49:50\t12:49:50\t12:49:50\t12:49:50\t12:49:50\t12:49:50\tGET\t12:49:50\tGET\t123.123.123.123\t123.123.123.123\t123.123.123.123123.123.123.123\t123.123.123.123\tGET\t12:49:50\tGET\t123.123.123.123\t123.123.123.123\t123.123.123.123123.123.123.123\t123.123.123.123\t123.123.123.123\t123.123.123.123\t123.123.123.123123.123.123.123\t2001:0db8:85a3:0000:0000:8a2e:0370:7334\t2001:0db8:85a3:0000:0000:8a2e:0370:7334\t2001:0db8:85a3:0000:0000:8a2e:0370:7334\t2001:0db8:85a3:0000:0000:8a2e::\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334\t2001:0db8:85a3::8a2e:0370:7334"));
+                .forEach(i -> stringList.add("2020-06-15\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET\t12:49:50\tGET"));
 
         String URITarget = "http://localhost:8081/insertlog";
-        int threadCount = 50;
-        int delay = 500;
+        int threadCount = 5;
+        int delay = 1000;
 
         sendToServer(stringList, threadCount, batchSize, delay, URITarget);
     }
@@ -110,6 +110,7 @@ class BenchHTTPClient{
             }
         } while(loop);
     }
+
     private List<List<String>> cutList(List<String> originalList, int partitionSize) {
         List<List<String>> partitions = new ArrayList<>();
         for (int i = 0; i < originalList.size(); i += partitionSize) {
